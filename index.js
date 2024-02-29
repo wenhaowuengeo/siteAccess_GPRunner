@@ -37,6 +37,7 @@ function runFunc() {
         };
 
         jobInfo.waitForJobCompletion(options).then(() => {
+          alert("task is complete!");
           jobInfo.fetchResultData("Send_Email").then(function (result) {
             console.log("job result:", result.value);
             htmlStr = result.value;
