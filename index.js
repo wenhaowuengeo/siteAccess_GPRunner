@@ -29,6 +29,13 @@ function runFunc() {
         // const jobid = jobInfo.jobId;
         // console.log("job id: ", jobid);
 
+        var progressDiv = document.createElement("div");
+        progressDiv.setAttribute("id", "progress");
+        progressDiv.innerText = "Task is running ... ";
+
+        progressDiv.style.textAlign = "center";
+        document.getElementsByTagName("body")[0].appendChild(progressDiv);
+
         const options = {
           interval: 100, //wait for 0.1 sec
           statusCallback: (j) => {
@@ -37,7 +44,10 @@ function runFunc() {
         };
 
         jobInfo.waitForJobCompletion(options).then(() => {
-          alert("task is complete!");
+          document.getElementById("progress").remove();
+
+          alert("Task is complete! Please click the Send Emails button.");
+
           jobInfo.fetchResultData("Send_Email").then(function (result) {
             console.log("job result:", result.value);
             htmlStr = result.value;
