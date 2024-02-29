@@ -34,6 +34,7 @@ function runFunc() {
         var progressDiv = document.createElement("div");
         progressDiv.setAttribute("id", "progressText");
         progressDiv.innerText = "Task is running ... ";
+        progressDiv.style.margin = "20px 25px 20px";
         progressDiv.style.fontSize = "1.2em";
         progressDiv.style.textAlign = "center";
         document.getElementsByTagName("body")[0].appendChild(progressDiv);
