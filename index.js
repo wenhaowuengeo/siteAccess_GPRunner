@@ -29,10 +29,12 @@ function runFunc() {
         // const jobid = jobInfo.jobId;
         // console.log("job id: ", jobid);
 
-        var progressDiv = document.createElement("div");
-        progressDiv.setAttribute("id", "progress");
-        progressDiv.innerText = "Task is running ... ";
+        // document.getElementById("progressBar").style.display = "block";
 
+        var progressDiv = document.createElement("div");
+        progressDiv.setAttribute("id", "progressText");
+        progressDiv.innerText = "Task is running ... ";
+        progressDiv.style.fontSize = "1.2em";
         progressDiv.style.textAlign = "center";
         document.getElementsByTagName("body")[0].appendChild(progressDiv);
 
@@ -44,9 +46,13 @@ function runFunc() {
         };
 
         jobInfo.waitForJobCompletion(options).then(() => {
-          document.getElementById("progress").remove();
+          //change the progress text
+          progressDiv.innerText =
+            "Task is complete! Please click the Send Emails button.";
 
-          alert("Task is complete! Please click the Send Emails button.");
+          // document.getElementById("progressBar").style.display = "none";
+
+          // alert("Task is complete! Please click the Send Emails button.");
 
           jobInfo.fetchResultData("Send_Email").then(function (result) {
             console.log("job result:", result.value);
@@ -64,6 +70,11 @@ function runFunc() {
 var emailBtnCounter = 0;
 
 function emailFunc() {
+  //clear the progress text
+  if (document.getElementById("progressText")) {
+    document.getElementById("progressText").remove();
+  }
+
   emailBtnCounter++;
   console.log("email button is clicked");
   // document.getElementById("emailButtonID").style.color = 'blue';
