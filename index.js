@@ -57,8 +57,15 @@ function runFunc() {
           //show the emails
           jobInfo.fetchResultData("Send_Email").then(function (result) {
             console.log("job result:", result.value);
-            htmlStr =
+            // console.log(typeof result.value);
+
+            if (result.value != "<html><head><title>Title of the document</title></head></html>") {
+              htmlStr =
               "Task is complete! Please send emails below." + result.value;
+            } else {
+              htmlStr = "No updates found. Please run this task later.";
+            }
+
             if (htmlStr) {
               var emailDiv = document.createElement("div");
               emailDiv.innerHTML = String(htmlStr);
@@ -70,6 +77,7 @@ function runFunc() {
                 )[0]
                 .appendChild(emailDiv);
             }
+            
           });
         });
       })
