@@ -50,8 +50,8 @@ function runFunc() {
         };
 
         jobInfo.waitForJobCompletion(options).then(() => {
-          if (runButton && progressDiv) {
-            runButton.remove();
+          if (progressDiv) {
+            
             progressDiv.remove();
           }
           //show the emails
@@ -62,8 +62,11 @@ function runFunc() {
             if (result.value != "<html><head><title>Title of the document</title></head></html>") {
               htmlStr =
               "Task is complete! Please send emails below." + result.value;
+              runButton.remove(); //remove runButton if the result is not null
             } else {
               htmlStr = "No updates found. Please run this task later.";
+              runButton.style.background = "#0054A4";
+              runButton.style.border = "#0054A4";
             }
 
             if (htmlStr) {
